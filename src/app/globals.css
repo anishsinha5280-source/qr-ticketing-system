@@ -1,0 +1,182 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink-950: #05070f;
+  --color-ink-900: #0a0f1d;
+  --color-ink-850: #0e1425;
+  --color-ink-800: #131b30;
+  --color-ink-700: #1d2740;
+}
+
+html,
+body {
+  background-color: #05070f;
+  color: #e2e8f0;
+  min-height: 100%;
+}
+
+body {
+  background-image:
+    radial-gradient(60rem 40rem at 110% -10%, rgba(79, 70, 229, 0.18), transparent 60%),
+    radial-gradient(50rem 35rem at -20% 0%, rgba(6, 182, 212, 0.14), transparent 55%);
+  background-attachment: fixed;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.35);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #24304d transparent;
+}
+
+/* ------------------------------------------------------------------ */
+/* Custom utilities (registered so other classes can @apply them)     */
+/* ------------------------------------------------------------------ */
+
+@utility card {
+  border-radius: 1rem;
+  border: 1px solid rgb(30 41 59 / 0.8);
+  background-color: rgb(15 23 42 / 0.5);
+  backdrop-filter: blur(4px);
+}
+
+@utility input {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgb(51 65 85 / 0.8);
+  background-color: rgb(2 6 23 / 0.7);
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: rgb(241 245 249);
+  outline: none;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+@utility label {
+  display: block;
+  margin-bottom: 0.375rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(148 163 184);
+}
+
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  transition: all 150ms ease;
+}
+
+@utility pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------ */
+/* Composed components                                                */
+/* ------------------------------------------------------------------ */
+
+@layer components {
+  .card-hover {
+    @apply transition-colors duration-200 hover:border-indigo-500/50 hover:bg-slate-900/80;
+  }
+
+  .input {
+    @apply placeholder:text-slate-500 focus:border-indigo-500;
+  }
+
+  .input:focus {
+    box-shadow: 0 0 0 3px rgb(99 102 241 / 0.25);
+  }
+
+  .btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .btn-primary {
+    @apply btn bg-indigo-600 text-white hover:bg-indigo-500 active:scale-[0.99];
+    box-shadow: 0 10px 24px -12px rgb(49 46 129 / 0.9);
+  }
+
+  .btn-secondary {
+    @apply btn border border-slate-700 bg-slate-900/70 text-slate-200 hover:border-slate-600 hover:bg-slate-800;
+  }
+
+  .btn-ghost {
+    @apply btn text-slate-300 hover:bg-slate-800/70 hover:text-white;
+  }
+
+  .btn-danger {
+    @apply btn border border-rose-800/70 bg-rose-950/50 text-rose-200 hover:bg-rose-900/50;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Animations                                                         */
+/* ------------------------------------------------------------------ */
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-45%);
+  }
+  100% {
+    transform: translateY(45%);
+  }
+}
+
+.scanline {
+  animation: scanline 2.1s ease-in-out infinite alternate;
+}
+
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.94) translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.pop-in {
+  animation: pop-in 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fade-up 0.35s ease-out both;
+}
